@@ -1,0 +1,47 @@
+<ion-view view-title="Dashboard">
+  <ion-content class="padding">
+    <h2>Welcome to LifeLine</h2>
+    <p>In situations where it takes too long for an ambulance to come, and every minute is crucial, press the button below to contact available nearby doctors that can provide assistance in the meantime.</p>
+
+    <div ng-if="emergencynumber != null && phonenumber != null && lat != 'Getting latitude...' && long != 'Getting longitude...'">
+    <form action="http://ieor185-danielseetoh.c9users.io/sendmessage" method="POST" target="index.html" id="call_medic_form">
+    <!--<form name="call_medic_form" ng-submit="submitData()" novalidate>-->
+      <!--<button ng-click = "submitData()">Submit</button>-->
+      <input type="hidden" name="addresspoint" value="({{lat}},{{long}})">
+      <input type="hidden" name="phonenumber" value="{{phonenumber}}">
+      <input type="hidden" name="currenthour" value="{{currenthour}}">
+      <a ng-click="submit_form()">
+      <button id="call_medic_submit" class="button button-full button-assertive" type="button" name="call_medic_submit">Help!</button>
+      </a>
+    </form>
+    </div>
+    <div ng-if="emergencynumber == null || phonenumber == null">
+      <p>Please set your emergency number and personal phone number.</p>
+    </div>
+    <div ng-if="lat == 'Getting latitude...' || long == 'Getting longitude...'">
+        <p>Getting Latitude and Longitude. Please Wait.</p>
+    </div>
+    <p>Emergency Number is: {{emergencynumber}}</p>
+    <p>Phonenumber is: {{phonenumber}}</p>
+    <!--<div ng-if="emergencynumber == null">-->
+      <hr>
+      <h4>Please set your emergency number:</h4>
+        <input ng-model="test1"></input>
+        <button ng-click="setEmergencyNumber(test1)">Set</button>
+    <!--</div>-->
+    
+    <!--<div ng-if="emergencynumber != null">-->
+    <!--  <p>Emergency Number is: {{emergencynumber}}</p>-->
+    <!--</div>-->
+    <!--<div ng-if="phonenumber == null">-->
+      <hr>
+      <h4>Please input your phone number:</h4>
+      <input ng-model="test2"></input>
+      <button ng-click="setPhoneNumber(test2)">Set</button>
+    <!--</div>-->
+    <!--<div ng-if="phonenumber != null">-->
+    <!--<p>Phone number is: {{phonenumber}}</p>-->
+    <!--</div>-->
+
+  </ion-content>
+</ion-view>
