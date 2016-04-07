@@ -1,1 +1,10 @@
 /* Empty. Add your own CSS if you like */
+.btn-circle {
+  width: 50%;
+  height: 50%;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 50%;
+  border-radius: 50%;
+}

@@ -3,7 +3,7 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', ['$scope', '$http', function($scope, $http) {
   $scope.lat = 'Getting latitude...';
   $scope.long = 'Getting longitude...';
-  $scope.emergencynumber = window.localStorage['emergencynumber'] || '+16505578826';
+  $scope.emergencynumber = window.localStorage['emergencynumber'] || +16505578826;
   $scope.phonenumber = window.localStorage['phonenumber'] || null;
   $scope.test1 = null;
   $scope.test2 = null;
@@ -46,81 +46,12 @@ angular.module('starter.controllers', [])
       var test = confirm("Are you sure you want to call a doctor?");
       if (test){
         form.submit();
-        window.location.href = "tel:"+window.localStorage['emergencynumber'];
       }
 
   }
   // Options: throw an error if no update is received every 30 seconds.
   //
   var watchID = navigator.geolocation.watchPosition(onSuccess, onError, {});
-  
-  // $scope.submitData = function(){
-  //   // var config = {
-  //   //   params: {
-  //   //     addresspoint: ($scope.lat, $scope.long),
-  //   //     phonenumber: $scope.phonenumber,
-  //   //     currenthour: $scope.currenthour
-  //   //   }
-  //   // };
-  //   // $http.post("http://ieor185-danielseetoh.c9users.io/sendmessage", null, config)
-  //   //   .success(function (data, status, headers, config)
-  //   //   {
-  //   //     alert('success');
-  //   //   })
-  //   //   .error(function (data, status, headers, config)
-  //   //   {
-  //   //     alert('fail'); 
-  //   // });
-  //   // var data = "addresspoint=" + encodeURIComponent($scope.lat,$scope.long) + "&phonenumber=" + encodeURIComponent($scope.phonenumber) + "&currenthour=" + encodeURIComponent($scope.currenthour);
-  //   // alert(data);
-  //   // $http({
-  //   //   method: 'POST',
-  //   //   url: 'http://ieor185-danielseetoh.c9users.io/sendmessage',
-  //   //   data: data,
-  //   //   headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-  //   // }).success(function(asfsd){
-  //   //   alert('success');
-  //   // });
-  //   Object.toparams = function ObjecttoParams(obj) {
-  //     var p = [];
-  //     for (var key in obj) {
-  //         p.push(key + '=' + encodeURIComponent(obj[key]));
-  //     }
-  //     return p.join('&');
-  //   };
-
-  //   var data1 = {
-  //       'addresspoint': '($scope.lat, $scope.long)',
-  //       'phonenumber': '$scope.phonenumber',
-  //       'currenthour': '$scope.currenthour'
-  //   };
-  //   $http({
-  //       url: 'http://ieor185-danielseetoh.c9users.io/sendmessage',
-  //       method: "POST",
-  //       data: Object.toparams(data1),
-  //       headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-  //   })
-  //   .then(function(response) {
-  //           // success
-  //           alert('success');
-  //   }, 
-  //   function(response) { // optional
-  //           // failed
-  //           alert('fail');
-  //   });
-
-  //   // $http.post('http://ieor185-danielseetoh.c9users.io/sendmessage', data).then(function successCallback(response) {
-  //   //   // this callback will be called asynchronously
-  //   //   // when the response is available
-  //   //   alert('success');
-    
-  //   // }, function errorCallback(response) {
-  //   //   // called asynchronously if an error occurs
-  //   //   // or server returns response with an error status.
-  //   //   alert('failure');
-  //   // });
-
-  // };
 
 
 }])
