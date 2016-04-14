@@ -3,7 +3,7 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', ['$scope', '$http', function($scope, $http) {
   $scope.lat = 'Getting latitude...';
   $scope.long = 'Getting longitude...';
-  $scope.emergencynumber = window.localStorage['emergencynumber'] || +16505578826;
+  $scope.emergencynumber = window.localStorage['emergencynumber'] || '+16505578826';
   $scope.phonenumber = window.localStorage['phonenumber'] || null;
   $scope.test1 = null;
   $scope.test2 = null;
@@ -26,10 +26,6 @@ angular.module('starter.controllers', [])
   //   the current GPS coordinates
   
   function onSuccess(position) {
-      // var element = document.getElementById('geolocation');
-      // element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
-      //                     'Longitude: ' + position.coords.longitude     + '<br />' +
-      //                     '<hr />'      + element.innerHTML;
     $scope.lat = position.coords.latitude;
     $scope.long = position.coords.longitude;
     $scope.$apply();
@@ -76,7 +72,31 @@ angular.module('starter.controllers', [])
 })
 
 .controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
+  $scope.emergencynumber = window.localStorage['emergencynumber'] || '+16505578826';
+  $scope.phonenumber = window.localStorage['phonenumber'] || null;
+
+})
+
+.controller('EditEmergencyCtrl', function($scope, $window){
+  $scope.emergencynumber = window.localStorage['emergencynumber'] || '+16505578826';
+  $scope.setEmergencyNumber = function(emergencynumber){
+    $scope.$apply();
+    $scope.emergencynumber = emergencynumber;
+    window.localStorage['emergencynumber'] = $scope.emergencynumber;
+    // window.location.reload();
+    window.location.replace('#/tab/account');
+    $window.location.reload();
+  };
+})
+
+.controller('EditPhoneCtrl', function($scope, $window){
+  $scope.phonenumber = window.localStorage['emergencynumber'] || '+16505578826';
+  $scope.setPhoneNumber = function(phonenumber){
+    $scope.$apply();
+    $scope.phonenumber = phonenumber;
+    window.localStorage['phonenumber'] = $scope.phonenumber;
+    // window.location.reload();
+    window.location.replace('#/tab/account');
+    $window.location.reload();
   };
 });

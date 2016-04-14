@@ -1,10 +1,46 @@
 /* Empty. Add your own CSS if you like */
 .btn-circle {
-  width: 50%;
-  height: 50%;
+  width: 40em;
+  height: 40em;
   text-align: center;
   padding: 6px 0;
   font-size: 12px;
   line-height: 50%;
   border-radius: 50%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  border-color: white;
+  border-width:1em;
+  border-radius: 50%;
+}
+ion-view { background: #ede1d1 !important; }
+.beigescheme { background: #ede1d1 !important; }
+img.center {
+    position: absolute;
+    top: 0; bottom:0; left: 0; right:0;
+    margin: auto;
+}
+
+.m-t-20 {
+  margin-top: 10 !important;
+}
+.midsize {
+  width: 70%;
+  height: 70%;
+}
+.bar-header {
+  height: 70px;
+}
+/*.bar-header .title {*/
+/*   line-height: 70px;*/
+/*}*/
+.has-header {
+   top: 70px;
+}
+.tabs {
+  background: #faf7f3 !important;
+  border-color: white !important;
 }

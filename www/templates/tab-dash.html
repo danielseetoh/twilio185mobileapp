@@ -1,45 +1,49 @@
-<ion-view view-title="Dashboard">
+
+
+<ion-view view-title="LifeLine">
   <ion-content class="padding">
-    <h2 class="text-center">Welcome to LifeLine</h2>
-    <p>In situations where it takes too long for an ambulance to come, and every minute is crucial, press the button below to contact available nearby doctors that can provide assistance in the meantime.</p>
-
-    <div ng-if="emergencynumber != null && phonenumber != null && lat != 'Getting latitude...' && long != 'Getting longitude...'" >
-    <form action="http://ieor185-danielseetoh.c9users.io/sendmessage" method="POST" target="index.html" id="call_medic_form">
-      <input type="hidden" name="addresspoint" value="({{lat}},{{long}})">
-      <input type="hidden" name="phonenumber" value="{{phonenumber}}">
-      <input type="hidden" name="currenthour" value="{{currenthour}}">
-      <a href="tel:{{emergencynumber}}">
-      <button id="call_medic_submit" class="button button-full button-assertive" type="button" name="call_medic_submit" ng-click="submit_form()">Help!</button>
-      </a>
-    </form>
+    <div class="container">
+      <div class="col-xs-10 col-xs-offset-1">
+        
+        
+        <!--If user does not have emergencynumber or phonenumber set, this block will appear-->
+        <div ng-if="emergencynumber == null || phonenumber == null">
+          <p class="text-center small bg-danger">Please set your emergency number and personal phone number.</p>
+        </div>
+        <!--If user's device is getting it's location, this block will appear-->
+        <div ng-if="lat == 'Getting latitude...' || long == 'Getting longitude...'">
+          <p class="text-center small ">Getting Latitude and Longitude. Please Wait.</p>
+        </div>
+        
+        
+        <div ng-if="emergencynumber != null && phonenumber != null && lat != 'Getting latitude...' && long != 'Getting longitude...'" >
+        <br>
+        <h5 class="text-center m-t-20">Tap to call 995 and to alert nearby medical personnel</h5>
+        <br>
+        
+        <form action="http://ieor185-danielseetoh.c9users.io/sendmessage" method="POST" target="index.html" id="call_medic_form">
+          <input type="hidden" name="addresspoint" value="({{lat}},{{long}})">
+          <input type="hidden" name="phonenumber" value="{{phonenumber}}">
+          <input type="hidden" name="currenthour" value="{{currenthour}}">
+          <!--<a href="tel:{{emergencynumber}}">-->
+          <!--<button id="call_medic_submit" class="button button-full button-assertive"name="call_medic_submit" ng-click="submit_form()">Help!</button>-->
+          <!--</a>-->
+          <p class="text-center">
+            <a href="tel:{{emergencynumber}}">
+              <img type="image" src="img/HelpButton.png" ng-click="submit_form()" class="midsize">
+            </a>
+          </p>
+        </form>
+        <br>
+        <h6 class="text-center small">
+          Nearby medical personnel will receive your location via text message and will try to reach you while you are waiting for the ambulance to arrive
+        </h6>
+        </div>
+        <!--<p>Emergency Number is: {{emergencynumber}}</p>-->
+        <!--<p>Phonenumber is: {{phonenumber}}</p>-->
+        
+        
+      </div>
     </div>
-    <div ng-if="emergencynumber == null || phonenumber == null">
-      <p>Please set your emergency number and personal phone number.</p>
-    </div>
-    <div ng-if="lat == 'Getting latitude...' || long == 'Getting longitude...'">
-        <p>Getting Latitude and Longitude. Please Wait.</p>
-    </div>
-    <p>Emergency Number is: {{emergencynumber}}</p>
-    <p>Phonenumber is: {{phonenumber}}</p>
-    <!--<div ng-if="emergencynumber == null">-->
-    <!--<hr>-->
-    <!--<h4>Please set your emergency number:</h4>-->
-    <!--<input ng-model="test1"></input>-->
-    <!--<button ng-click="setEmergencyNumber(test1)">Set</button>-->
-    <!--</div>-->
-    
-    <!--<div ng-if="emergencynumber != null">-->
-    <!--  <p>Emergency Number is: {{emergencynumber}}</p>-->
-    <!--</div>-->
-    <!--<div ng-if="phonenumber == null">-->
-      <hr>
-      <h4>Please input your phone number:</h4>
-      <input ng-model="test2"></input>
-      <button ng-click="setPhoneNumber(test2)">Set</button>
-    <!--</div>-->
-    <!--<div ng-if="phonenumber != null">-->
-    <!--<p>Phone number is: {{phonenumber}}</p>-->
-    <!--</div>-->
-
   </ion-content>
 </ion-view>
