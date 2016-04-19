@@ -1,14 +1,12 @@
-
-
-<ion-view view-title="LifeLine">
+<ion-view view-title="LifeLine" class="col-sm-8 col-sm-offset-2">
   <ion-content class="padding">
     <div class="container">
-      <div class="col-sm-8 col-sm-offset-2">
+      <!--<div class="col-sm-8 col-sm-offset-2">-->
         
         
         <!--If user does not have emergencynumber or phonenumber set, this block will appear-->
         <div ng-if="emergencynumber == null || phonenumber == null">
-          <p class="text-center small bg-danger">Please set your emergency number and personal phone number.</p>
+          <p class="text-center small bg-danger">Please set your personal phone number.</p>
         </div>
         <!--If user's device is getting it's location, this block will appear-->
         <div ng-if="lat == 'Getting latitude...' || long == 'Getting longitude...'">
@@ -29,9 +27,9 @@
           <!--<button id="call_medic_submit" class="button button-full button-assertive"name="call_medic_submit" ng-click="submit_form()">Help!</button>-->
           <!--</a>-->
           <p class="text-center">
-            <a href="tel:{{emergencynumber}}">
+            <!--<a href="tel:{{emergencynumber}}">-->
               <img type="image" src="img/HelpButton.png" ng-click="submit_form()" class="midsize">
-            </a>
+            <!--</a>-->
           </p>
         </form>
         <br>
@@ -43,7 +41,8 @@
         <!--<p>Phonenumber is: {{phonenumber}}</p>-->
         
         
-      </div>
+      <!--</div>-->
     </div>
   </ion-content>
 </ion-view>
+

@@ -1,4 +1,48 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', [],  function($httpProvider) {
+  // Use x-www-form-urlencoded Content-Type
+  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+ 
+  /**
+   * The workhorse; converts an object to x-www-form-urlencoded serialization.
+   * @param {Object} obj
+   * @return {String}
+   */ 
+  var param = function(obj) {
+    var query = '', name, value, fullSubName, subName, subValue, innerObj, i;
+      
+    for(name in obj) {
+      value = obj[name];
+        
+      if(value instanceof Array) {
+        for(i=0; i<value.length; ++i) {
+          subValue = value[i];
+          fullSubName = name + '[' + i + ']';
+          innerObj = {};
+          innerObj[fullSubName] = subValue;
+          query += param(innerObj) + '&';
+        }
+      }
+      else if(value instanceof Object) {
+        for(subName in value) {
+          subValue = value[subName];
+          fullSubName = name + '[' + subName + ']';
+          innerObj = {};
+          innerObj[fullSubName] = subValue;
+          query += param(innerObj) + '&';
+        }
+      }
+      else if(value !== undefined && value !== null)
+        query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
+    }
+      
+    return query.length ? query.substr(0, query.length - 1) : query;
+  };
+ 
+  // Override $http service's default transformRequest
+  $httpProvider.defaults.transformRequest = [function(data) {
+    return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
+  }];
+})
 
 .controller('DashCtrl', ['$scope', '$http', function($scope, $http) {
   $scope.lat = 'Getting latitude...';
@@ -38,43 +82,49 @@ angular.module('starter.controllers', [])
             'message: ' + error.message + '\n');
   }
   $scope.submit_form = function() {
-      var form =  document.getElementById("call_medic_form");
-      var test = confirm("Are you sure you want to call a doctor?");
-      if (test){
-        form.submit();
-      }
-
+      // var form =  document.getElementById("call_medic_form");
+      // var test = confirm("Are you sure you want to call a doctor?");
+      // if (test){
+      //   form.submit();
+      // }
+      $http({
+        method: 'POST',
+        url: 'http://ieor185-danielseetoh.c9users.io/sendmessage',
+        data: "message=hi",
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      });
   }
   // Options: throw an error if no update is received every 30 seconds.
   //
   var watchID = navigator.geolocation.watchPosition(onSuccess, onError, {});
 
-
+  
 }])
 
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('TipsCtrl', function($scope, Tips) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
   // listen for the $ionicView.enter event:
   //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
+
+  $scope.tips = Tips.all();
+  $scope.remove = function(tip) {
+    Tips.remove(tip);
   };
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('TipDetailCtrl', function($scope, $stateParams, Tips) {
+  $scope.tip = Tips.get($stateParams.tipId);
 })
 
 .controller('AccountCtrl', function($scope) {
-  $scope.emergencynumber = window.localStorage['emergencynumber'] || '+16505578826';
-  $scope.phonenumber = window.localStorage['phonenumber'] || null;
-
+  $scope.$on('$ionicView.enter', function(e) {
+  
+    $scope.emergencynumber = window.localStorage['emergencynumber'] || '+16505578826';
+    $scope.phonenumber = window.localStorage['phonenumber'] || null;
+  });
 })
 
 .controller('EditEmergencyCtrl', function($scope, $window){
@@ -97,6 +147,6 @@ angular.module('starter.controllers', [])
     window.localStorage['phonenumber'] = $scope.phonenumber;
     // window.location.reload();
     window.location.replace('#/tab/account');
-    $window.location.reload();
+    // $window.location.reload();
   };
 });
