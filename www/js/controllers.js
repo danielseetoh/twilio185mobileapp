@@ -45,15 +45,18 @@ angular.module('starter.controllers', [],  function($httpProvider) {
 })
 
 .controller('DashCtrl', ['$scope', '$http', function($scope, $http) {
+
   $scope.lat = 'Getting latitude...';
   $scope.long = 'Getting longitude...';
-  $scope.emergencynumber = window.localStorage['emergencynumber'] || '+16505578826';
-  $scope.phonenumber = window.localStorage['phonenumber'] || null;
-  $scope.test1 = null;
-  $scope.test2 = null;
-  var d = new Date();
-  var n = d.getHours();
-  $scope.currenthour = n;
+  $scope.$on('$ionicView.enter', function(e) {
+    $scope.emergencynumber = window.localStorage['emergencynumber'] || '+16505578826';
+    $scope.phonenumber = window.localStorage['phonenumber'] || null;
+    $scope.test1 = null;
+    $scope.test2 = null;
+    var d = new Date();
+    var n = d.getHours();
+    $scope.currenthour = n;
+  });
   $scope.setEmergencyNumber = function(emergencynumber){
     $scope.$apply();
     $scope.emergencynumber = emergencynumber;
@@ -82,17 +85,22 @@ angular.module('starter.controllers', [],  function($httpProvider) {
             'message: ' + error.message + '\n');
   }
   $scope.submit_form = function() {
-      // var form =  document.getElementById("call_medic_form");
-      // var test = confirm("Are you sure you want to call a doctor?");
-      // if (test){
-      //   form.submit();
-      // }
-      $http({
-        method: 'POST',
-        url: 'http://ieor185-danielseetoh.c9users.io/sendmessage',
-        data: "message=hi",
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    // var form =  document.getElementById("call_medic_form");
+    var test = confirm("Are you sure you want to call a doctor?");
+    if (test){
+
+      $scope.addresspoint = ($scope.lat, $scope.long)
+      var data = "phonenumber=" + $scope.phonenumber + "&lat=" + $scope.lat + "&long=" + $scope.long + "&currenthour=" + $scope.currenthour;
+  
+      $http.post("http://ieor185-danielseetoh.c9users.io/sendmessage", data, {'Content-Type': 'application/x-www-form-urlencoded'}
+      ).success(function (data, status, headers, config) {
+          // TODO
+          alert('success');
+      }).error(function (data, status, headers, config) {
+          // TODO
+          alert('error');
       });
+    }
   }
   // Options: throw an error if no update is received every 30 seconds.
   //
@@ -121,7 +129,6 @@ angular.module('starter.controllers', [],  function($httpProvider) {
 
 .controller('AccountCtrl', function($scope) {
   $scope.$on('$ionicView.enter', function(e) {
-  
     $scope.emergencynumber = window.localStorage['emergencynumber'] || '+16505578826';
     $scope.phonenumber = window.localStorage['phonenumber'] || null;
   });
