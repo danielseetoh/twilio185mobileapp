@@ -51,6 +51,7 @@ angular.module('starter.controllers', [],  function($httpProvider) {
   $scope.$on('$ionicView.enter', function(e) {
     $scope.emergencynumber = window.localStorage['emergencynumber'] || '+16505578826';
     $scope.phonenumber = window.localStorage['phonenumber'] || null;
+    $scope.name = window.localStorage['name'] || null;
     $scope.test1 = null;
     $scope.test2 = null;
     var d = new Date();
@@ -90,8 +91,7 @@ angular.module('starter.controllers', [],  function($httpProvider) {
     if (test){
 
       $scope.addresspoint = ($scope.lat, $scope.long)
-      var data = "phonenumber=" + $scope.phonenumber + "&lat=" + $scope.lat + "&long=" + $scope.long + "&currenthour=" + $scope.currenthour;
-  
+      var data = "phonenumber=" + $scope.phonenumber + "&lat=" + $scope.lat + "&long=" + $scope.long + "&currenthour=" + $scope.currenthour + "&name=" + $scope.name;
       $http.post("http://ieor185-danielseetoh.c9users.io/sendmessage", data, {'Content-Type': 'application/x-www-form-urlencoded'}
       ).success(function (data, status, headers, config) {
           // TODO
@@ -131,6 +131,7 @@ angular.module('starter.controllers', [],  function($httpProvider) {
   $scope.$on('$ionicView.enter', function(e) {
     $scope.emergencynumber = window.localStorage['emergencynumber'] || '+16505578826';
     $scope.phonenumber = window.localStorage['phonenumber'] || null;
+    $scope.name = window.localStorage['name'] || null;
   });
 })
 
@@ -142,16 +143,36 @@ angular.module('starter.controllers', [],  function($httpProvider) {
     window.localStorage['emergencynumber'] = $scope.emergencynumber;
     // window.location.reload();
     window.location.replace('#/tab/account');
-    $window.location.reload();
+    // $window.location.reload();
   };
 })
 
 .controller('EditPhoneCtrl', function($scope, $window){
-  $scope.phonenumber = window.localStorage['emergencynumber'] || '+16505578826';
+  $scope.phonenumber = window.localStorage['phonenumber'] || null;
+  // currently only works for north american numbers
+  $scope.phregex = /^[\+][1][(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
+  $scope.error = null;
   $scope.setPhoneNumber = function(phonenumber){
+    if ($scope.phregex.exec(phonenumber)) {
+      $scope.$apply();
+      $scope.phonenumber = phonenumber;
+      $scope.error = null;
+      window.localStorage['phonenumber'] = $scope.phonenumber;
+      // window.location.reload();
+      window.location.replace('#/tab/account');
+      // $window.location.reload();
+    } else {
+      $scope.error = "Error: Follow the format +15101234567."
+    }
+  };
+})
+
+.controller('EditNameCtrl', function($scope, $window){
+  $scope.name = window.localStorage['name'] || null;
+  $scope.setName = function(name){
     $scope.$apply();
-    $scope.phonenumber = phonenumber;
-    window.localStorage['phonenumber'] = $scope.phonenumber;
+    $scope.name = name;
+    window.localStorage['name'] = $scope.name;
     // window.location.reload();
     window.location.replace('#/tab/account');
     // $window.location.reload();

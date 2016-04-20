@@ -96,6 +96,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'EditPhoneCtrl'
       }
     }
+  })
+  .state('tab.edit-name', {
+    url: '/account/edit-name',
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/tab-edit-name.html',
+        controller: 'EditNameCtrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback

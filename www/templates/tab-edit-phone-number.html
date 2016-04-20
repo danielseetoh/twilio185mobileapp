@@ -3,10 +3,12 @@
       
         <label class="item item-input">
             <span class="input-label">Full Phone Number</span>
-            <input type="tel" ng-model="test2" placeholder="e.g. +11234567890">
+            <input id="pn" type="tel" ng-model="test" placeholder="{{phonenumber}}" ng-pattern="phregex">
         </label>
-        <button class="button button-block button-positive" ng-click ="setPhoneNumber(test2)">
+        
+        <button class="button button-block button-positive" ng-click ="setPhoneNumber(test)">
           Set Phone Number
         </button>
+        <p>{{error}}</p>
     </ion-content>
 </ion-view>

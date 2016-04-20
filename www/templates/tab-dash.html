@@ -5,8 +5,8 @@
         
         
         <!--If user does not have emergencynumber or phonenumber set, this block will appear-->
-        <div ng-if="emergencynumber == null || phonenumber == null">
-          <p class="text-center small bg-danger">Please set your personal phone number.</p>
+        <div ng-if="emergencynumber == null || phonenumber == null || name == null">
+          <p class="text-center small bg-danger">Please set your personal phonenumber/name under Account.</p>
         </div>
         <!--If user's device is getting it's location, this block will appear-->
         <div ng-if="lat == 'Getting latitude...' || long == 'Getting longitude...'">
