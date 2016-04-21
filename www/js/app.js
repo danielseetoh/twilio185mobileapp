@@ -105,7 +105,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'EditNameCtrl'
       }
     }
-  });
+  })
+  .state('tab.donation', {
+    url: '/donation',
+    views: {
+      'tab-donation': {
+        templateUrl: 'templates/tab-donation.html',
+        controller: 'DonationCtrl'
+      }
+    }
+  })
+  ;
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');

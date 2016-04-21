@@ -1,14 +1,15 @@
 <ion-view view-title="Edit Phone Number">
     <ion-content>
-      
+      <div class="list list-inset">
         <label class="item item-input">
             <span class="input-label">Full Phone Number</span>
             <input id="pn" type="tel" ng-model="test" placeholder="{{phonenumber}}" ng-pattern="phregex">
         </label>
-        
-        <button class="button button-block button-positive" ng-click ="setPhoneNumber(test)">
+      </div>
+        <button class="button button-block button-calm" ng-click ="setPhoneNumber(test)">
           Set Phone Number
         </button>
+      
         <p>{{error}}</p>
     </ion-content>
 </ion-view>

@@ -169,4 +169,14 @@ angular.module('starter.controllers', [],  function($httpProvider) {
     window.localStorage['name'] = $scope.name;
     window.location.replace('#/tab/account');
   };
+})
+
+.controller('DonationCtrl', function($scope, $window){
+  // $scope.name = window.localStorage['name'] || null;
+  // $scope.setName = function(name){
+  //   $scope.$apply();
+  //   $scope.name = name;
+  //   window.localStorage['name'] = $scope.name;
+  //   window.location.replace('#/tab/account');
+  // };
 });

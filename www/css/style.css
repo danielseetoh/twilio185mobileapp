@@ -49,10 +49,10 @@ img.center {
   padding: 20px 50px 20px 50px;
 }
 
-.resize {
-  
-  height:50%;
-  width:auto;
+.bottomdiv {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 .ion-allergies,
