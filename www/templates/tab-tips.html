@@ -1,10 +1,10 @@
 <ion-view view-title="Emergency First Aid Procedures">
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-icon-right" ng-repeat="tip in tips" type="item-text-wrap" href="#/tab/tips/{{tip.id}}">
-        <!--<img ng-src="{{tip.face}}">-->
-        <h2 class = "text-center">{{tip.name}}</h2>
-        <!--<p>{{tip.information}}</p>-->
+      <ion-item class="item-icon-left item-remove-animate item-icon-right" ng-repeat="tip in tips" type="item-text-wrap" href="#/tab/tips/{{tip.id}}">
+        <!--<img ng-src="{{tip.image}}">-->
+        <i class="icon {{tip.icon}} resize"></i>
+        <h2>&nbsp;&nbsp;&nbsp;{{tip.name}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
 
         <!--<ion-option-button class="button-assertive" ng-click="remove(tip)">-->

@@ -86,19 +86,17 @@ angular.module('starter.controllers', [],  function($httpProvider) {
             'message: ' + error.message + '\n');
   }
   $scope.submit_form = function() {
-    // var form =  document.getElementById("call_medic_form");
     var test = confirm("Are you sure you want to call a doctor?");
     if (test){
-
       $scope.addresspoint = ($scope.lat, $scope.long)
       var data = "phonenumber=" + $scope.phonenumber + "&lat=" + $scope.lat + "&long=" + $scope.long + "&currenthour=" + $scope.currenthour + "&name=" + $scope.name;
       $http.post("http://ieor185-danielseetoh.c9users.io/sendmessage", data, {'Content-Type': 'application/x-www-form-urlencoded'}
       ).success(function (data, status, headers, config) {
           // TODO
-          alert('success');
+          alert('Success!');
       }).error(function (data, status, headers, config) {
           // TODO
-          alert('error');
+          alert('Error!');
       });
     }
   }
@@ -141,9 +139,7 @@ angular.module('starter.controllers', [],  function($httpProvider) {
     $scope.$apply();
     $scope.emergencynumber = emergencynumber;
     window.localStorage['emergencynumber'] = $scope.emergencynumber;
-    // window.location.reload();
     window.location.replace('#/tab/account');
-    // $window.location.reload();
   };
 })
 
@@ -158,9 +154,7 @@ angular.module('starter.controllers', [],  function($httpProvider) {
       $scope.phonenumber = phonenumber;
       $scope.error = null;
       window.localStorage['phonenumber'] = $scope.phonenumber;
-      // window.location.reload();
       window.location.replace('#/tab/account');
-      // $window.location.reload();
     } else {
       $scope.error = "Error: Follow the format +15101234567."
     }
@@ -173,8 +167,6 @@ angular.module('starter.controllers', [],  function($httpProvider) {
     $scope.$apply();
     $scope.name = name;
     window.localStorage['name'] = $scope.name;
-    // window.location.reload();
     window.location.replace('#/tab/account');
-    // $window.location.reload();
   };
 });

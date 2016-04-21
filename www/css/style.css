@@ -44,3 +44,96 @@ img.center {
   background: #faf7f3 !important;
   border-color: white !important;
 }
+
+.padded {
+  padding: 20px 50px 20px 50px;
+}
+
+.resize {
+  
+  height:50%;
+  width:auto;
+}
+
+.ion-allergies,
+.ion-allergies:before {
+  content: url('../img/allergies.png') !important; 
+}
+
+.ion-asthma,
+.ion-asthma:before {
+  content: url('../img/asthma.png') !important; 
+}
+
+.ion-bleeding,
+.ion-bleeding:before {
+  content: url('../img/bleeding.png') !important; 
+}
+.ion-burns,
+.ion-burns:before {
+  content: url('../img/burns.png') !important; 
+}
+
+.ion-cardiacarrest,
+.ion-cardiacarrest:before {
+  content: url('../img/cardiacarrest.png') !important; 
+}
+
+.ion-choking,
+.ion-choking:before {
+  content: url('../img/choking.png') !important; 
+}
+.ion-cpr,
+.ion-cpr:before {
+  content: url('../img/cpr.png') !important; 
+}
+
+.ion-diabetic,
+.ion-diabetic:before {
+  content: url('../img/diabetic.png') !important; 
+}
+
+.ion-epilepsy,
+.ion-epilepsy:before {
+  content: url('../img/epilepsy.png') !important; 
+}
+
+.ion-faint,
+.ion-faint:before {
+  content: url('../img/faint.png') !important; 
+}
+
+.ion-fractures,
+.ion-fractures:before {
+  content: url('../img/fractures.png') !important; 
+}
+
+.ion-heatstroke,
+.ion-heatstroke:before {
+  content: url('../img/heatstroke.png') !important; 
+}
+
+.ion-hypothermia,
+.ion-hypothermia:before {
+  content: url('../img/hypothermia.png') !important; 
+}
+
+.ion-insectbites,
+.ion-insectbites:before {
+  content: url('../img/insectbites.png') !important; 
+}
+
+.ion-poisoning,
+.ion-poisoning:before {
+  content: url('../img/poisoning.png') !important; 
+}
+
+.ion-sprain,
+.ion-sprain:before {
+  content: url('../img/sprain.png') !important; 
+}
+
+.ion-stroke,
+.ion-stroke:before {
+  content: url('../img/stroke.png') !important; 
+}

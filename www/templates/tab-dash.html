@@ -16,13 +16,13 @@
         
         <div ng-if="emergencynumber != null && phonenumber != null && lat != 'Getting latitude...' && long != 'Getting longitude...'" >
         <br>
-        <h5 class="text-center m-t-20">Tap to call 995 and to alert nearby medical personnel</h5>
+          <h5 class="text-center padded">Tap to call 995 and alert nearby medical personnel</h5>
         <br>
         
-        <form action="http://ieor185-danielseetoh.c9users.io/sendmessage" method="POST" target="index.html" id="call_medic_form">
-          <input type="hidden" name="addresspoint" value="({{lat}},{{long}})">
-          <input type="hidden" name="phonenumber" value="{{phonenumber}}">
-          <input type="hidden" name="currenthour" value="{{currenthour}}">
+        <!--<form action="http://ieor185-danielseetoh.c9users.io/sendmessage" method="POST" target="index.html" id="call_medic_form">-->
+        <!--  <input type="hidden" name="addresspoint" value="({{lat}},{{long}})">-->
+        <!--  <input type="hidden" name="phonenumber" value="{{phonenumber}}">-->
+        <!--  <input type="hidden" name="currenthour" value="{{currenthour}}">-->
           <!--<a href="tel:{{emergencynumber}}">-->
           <!--<button id="call_medic_submit" class="button button-full button-assertive"name="call_medic_submit" ng-click="submit_form()">Help!</button>-->
           <!--</a>-->
@@ -31,11 +31,11 @@
               <img type="image" src="img/HelpButton.png" ng-click="submit_form()" class="midsize">
             </a>
           </p>
-        </form>
+        <!--</form>-->
         <br>
-        <h6 class="text-center small">
-          Nearby medical personnel will receive your location via text message and will try to reach you while you are waiting for the ambulance to arrive
-        </h6>
+          <h6 class="text-center small padded">
+            Nearby medical personnel will receive your location via text message and will try to reach you while you are waiting for the ambulance to arrive
+          </h6>
         </div>
         <!--<p>Emergency Number is: {{emergencynumber}}</p>-->
         <!--<p>Phonenumber is: {{phonenumber}}</p>-->
