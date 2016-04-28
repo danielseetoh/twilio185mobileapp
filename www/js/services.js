@@ -34,7 +34,7 @@ angular.module('starter.services', [])
     instructions: {
       1: "Put pressure on the wound with anything to stop or slow down the blood outflow", 
       2: "Keep pressure on the wound until help arrives", 
-      3: "If bleeding is too sever, get someone to call 995 while you continue to put pressure on the wound"
+      3: "If bleeding is too severe, get someone to call 995 while you continue to put pressure on the wound"
     },
     icon: 'ion-bleeding',
     image1: 'img/appimages/bleeding1.png',

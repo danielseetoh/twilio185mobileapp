@@ -23,24 +23,33 @@
         </p>
       </div>
     </div>
+    
     <div class="card">
       <div class="item item-divider">
         Instructions
       </div>
       <div class="item item-text-wrap" ng-repeat="instruction in tip.instructions">
+        <p>
         {{instruction}}
+        </p>
       </div>
-      <div class="item item-text-wrap" ng-if="tip.extrainstructions">
+    </div>
+    
+    <div class="card" ng-if="tip.extrainstructions">
+      <div class="item item-divider">
+        More Information
+      </div>
+      <div class="item item-text-wrap">
         <p ng-repeat="instruction in tip.extrainstructions">
         {{instruction}}
         </p>
       </div>
-
+    </div>
+    
+    <div class="card">
       <a ng-if="emergencynumber != null && phonenumber != null && lat != 'Getting latitude...' && long != 'Getting longitude...'" class="item item-icon-left assertive" ng-click="showConfirm()">
         <i class="icon ion-helpbutton"></i>
-        <!--<p class="text-center">-->
-        &nbsp;&nbsp;&nbsp; Call 995 and Get Help!
-        <!--</p>-->
+        &nbsp;&nbsp;&nbsp; Call 995 and get help!
       </a>
       <div ng-if="emergencynumber == null || phonenumber == null || name == null" class="item item-text-wrap">
         <p class="text-center small bg-danger">Please set your personal phonenumber/name under Account.</p>
