@@ -44,7 +44,7 @@ angular.module('starter.controllers', [],  function($httpProvider) {
   }];
 })
 
-.controller('DashCtrl', ['$scope', '$http', function($scope, $http) {
+.controller('DashCtrl', ['$ionicPopup', '$scope', '$http', function($ionicPopup, $scope, $http) {
 
   $scope.lat = 'Getting latitude...';
   $scope.long = 'Getting longitude...';
@@ -58,16 +58,6 @@ angular.module('starter.controllers', [],  function($httpProvider) {
     var n = d.getHours();
     $scope.currenthour = n;
   });
-  $scope.setEmergencyNumber = function(emergencynumber){
-    $scope.$apply();
-    $scope.emergencynumber = emergencynumber;
-    window.localStorage['emergencynumber'] = $scope.emergencynumber;
-  };
-  $scope.setPhoneNumber = function(phonenumber){
-    $scope.$apply();
-    $scope.phonenumber = phonenumber;
-    window.localStorage['phonenumber'] = $scope.phonenumber;
-  };
   
   // onSuccess Callback
   //   This method accepts a `Position` object, which contains
@@ -85,25 +75,40 @@ angular.module('starter.controllers', [],  function($httpProvider) {
       alert('code: '    + error.code    + '\n' +
             'message: ' + error.message + '\n');
   }
-  $scope.submit_form = function() {
-    var test = confirm("Are you sure you want to call a doctor?");
-    if (test){
-      $scope.addresspoint = ($scope.lat, $scope.long)
-      var data = "phonenumber=" + $scope.phonenumber + "&lat=" + $scope.lat + "&long=" + $scope.long + "&currenthour=" + $scope.currenthour + "&name=" + $scope.name;
-      $http.post("http://ieor185-danielseetoh.c9users.io/sendmessage", data, {'Content-Type': 'application/x-www-form-urlencoded'}
-      ).success(function (data, status, headers, config) {
-          // TODO
-          alert('Success!');
-      }).error(function (data, status, headers, config) {
-          // TODO
-          alert('Error!');
-      });
-    }
-  }
-  // Options: throw an error if no update is received every 30 seconds.
-  //
+  
   var watchID = navigator.geolocation.watchPosition(onSuccess, onError, {});
-
+    
+  
+  $scope.showConfirm = function() {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Notify Nearby Responders',
+      template: 'Are you sure you want to notify nearby responders?',
+      okType: 'button-assertive'
+    });
+      
+    confirmPopup.then(function(res) {
+      if(res) {
+        $scope.addresspoint = ($scope.lat, $scope.long);
+        var data = "phonenumber=" + $scope.phonenumber + "&lat=" + $scope.lat + "&long=" + $scope.long + "&currenthour=" + $scope.currenthour + "&name=" + $scope.name;
+        $http.post("http://ieor185-danielseetoh.c9users.io/sendmessage", data, {'Content-Type': 'application/x-www-form-urlencoded'}
+        ).success(function (data, status, headers, config) {
+          $ionicPopup.alert({
+             title: 'Success',
+             template: 'Nearby Responders have been notifed!',
+             okType: 'button-assertive'
+          });
+        }).error(function (data, status, headers, config) {
+          $ionicPopup.alert({
+             title: 'Error',
+             template: 'Not able to notify nearby responders.',
+             okType: 'button-assertive'
+          });
+        });
+        window.open('tel:'+$scope.emergencynumber);
+  
+      }
+    });
+  };
   
 }])
 
@@ -121,8 +126,64 @@ angular.module('starter.controllers', [],  function($httpProvider) {
   };
 })
 
-.controller('TipDetailCtrl', function($scope, $stateParams, Tips) {
+.controller('TipDetailCtrl', function($ionicPopup, $scope, $stateParams, $http, Tips) {
   $scope.tip = Tips.get($stateParams.tipId);
+  $scope.lat = 'Getting latitude...';
+  $scope.long = 'Getting longitude...';
+  $scope.$on('$ionicView.enter', function(e) {
+    $scope.emergencynumber = window.localStorage['emergencynumber'] || '+16505578826';
+    $scope.phonenumber = window.localStorage['phonenumber'] || null;
+    $scope.name = window.localStorage['name'] || null;
+    $scope.test1 = null;
+    $scope.test2 = null;
+    var d = new Date();
+    var n = d.getHours();
+    $scope.currenthour = n;
+    $scope.issuetype = $scope.tip.name;
+  });
+  function onSuccess(position) {
+    $scope.lat = position.coords.latitude;
+    $scope.long = position.coords.longitude;
+    $scope.$apply();
+  }
+  
+  // onError Callback receives a PositionError object
+  //
+  function onError(error) {
+      alert('code: '    + error.code    + '\n' +
+            'message: ' + error.message + '\n');
+  }
+  $scope.showConfirm = function() {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Notify Nearby Responders',
+      template: 'Are you sure you want to notify nearby responders?',
+      okType: 'button-assertive'
+    });
+      
+    confirmPopup.then(function(res) {
+      if(res) {
+        $scope.addresspoint = ($scope.lat, $scope.long);
+        var data = "phonenumber=" + $scope.phonenumber + "&lat=" + $scope.lat + "&long=" + $scope.long + "&currenthour=" + $scope.currenthour + "&name=" + $scope.name + "&issuetype=" + $scope.issuetype;
+        $http.post("http://ieor185-danielseetoh.c9users.io/sendmessage", data, {'Content-Type': 'application/x-www-form-urlencoded'}
+        ).success(function (data, status, headers, config) {
+          $ionicPopup.alert({
+             title: 'Success',
+             template: 'Nearby Responders have been notifed!',
+             okType: 'button-assertive'
+          });
+        }).error(function (data, status, headers, config) {
+          $ionicPopup.alert({
+             title: 'Error',
+             template: 'Not able to notify nearby responders.',
+             okType: 'button-assertive'
+          });
+        });
+        window.open('tel:'+$scope.emergencynumber);
+  
+      }
+    });
+  };
+    var watchID = navigator.geolocation.watchPosition(onSuccess, onError, {});
 })
 
 .controller('AccountCtrl', function($scope) {
@@ -172,11 +233,5 @@ angular.module('starter.controllers', [],  function($httpProvider) {
 })
 
 .controller('DonationCtrl', function($scope, $window){
-  // $scope.name = window.localStorage['name'] || null;
-  // $scope.setName = function(name){
-  //   $scope.$apply();
-  //   $scope.name = name;
-  //   window.localStorage['name'] = $scope.name;
-  //   window.location.replace('#/tab/account');
-  // };
+
 });

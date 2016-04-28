@@ -31,6 +31,10 @@ img.center {
   width: 60%;
   height: 60%;
 }
+.fullsize {
+  width: 100%;
+  height: auto; 
+}
 .bar-header {
   height: 70px;
 }
@@ -54,6 +58,7 @@ img.center {
     bottom: 0;
     width: 100%;
 }
+
 
 .ion-allergies,
 .ion-allergies:before {
@@ -79,13 +84,20 @@ img.center {
   content: url('../img/cardiacarrest.png') !important; 
 }
 
+
 .ion-choking,
 .ion-choking:before {
   content: url('../img/choking.png') !important; 
 }
+
 .ion-cpr,
 .ion-cpr:before {
   content: url('../img/cpr.png') !important; 
+}
+
+.ion-concussion,
+.ion-concussion:before {
+  content: url('../img/concussion.png') !important; 
 }
 
 .ion-diabetic,
@@ -106,6 +118,11 @@ img.center {
 .ion-fractures,
 .ion-fractures:before {
   content: url('../img/fractures.png') !important; 
+}
+
+.ion-heartattack,
+.ion-heartattack:before {
+  content: url('../img/heartattack.png') !important; 
 }
 
 .ion-heatstroke,
@@ -136,4 +153,9 @@ img.center {
 .ion-stroke,
 .ion-stroke:before {
   content: url('../img/stroke.png') !important; 
+}
+
+.ion-helpbutton,
+.ion-helpbutton:before {
+  content: url('../img/HelpButton.png') !important; 
 }
